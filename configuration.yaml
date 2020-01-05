@@ -1,0 +1,36 @@
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+homeassistant:
+  name: kuzindom
+  latitude: !secret latitude
+  longitude: !secret longitude
+  unit_system: metric
+  time_zone: Europe/Moscow
+
+# Text to speech
+tts:
+  - platform: google_translate
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+light: !include light.yaml
+mqtt:
+  broker: 127.0.0.1
+  discovery: true
+  discovery_prefix: homeassistant
+#  - platform: group
+#    name: Kitchen Lights
+#    entities:
+#      - light.Kitchen_work_zone
+#      - light.Kitchen_on_table
+#  - platform: group
+#    name: Mihail Lights
+#    entities:
+#      - light.Mihail_2_lamps
+#      - light.Mihail_4_lamps

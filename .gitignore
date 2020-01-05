@@ -1,0 +1,9 @@
+secrets.yaml
+*.pyc
+*.log
+*.db
+.cloud/
+deps/
+__pycache__/
+.storage/
+tts/

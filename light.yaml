@@ -1,0 +1,84 @@
+  - platform: mqtt
+    name: Кухня над столом
+    state_topic: "/iot_kitchen/Relay/Switch"
+    command_topic: "/iot_kitchen/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Кухня рабочая зона
+    state_topic: "/iot_kitchen/Relay2/Switch"
+    command_topic: "/iot_kitchen/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Миша 2 лампы
+    state_topic: "/iot_mihail/Relay/Switch"
+    command_topic: "/iot_mihail/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Миша 4 лампы
+    state_topic: "/iot_mihail/Relay2/Switch"
+    command_topic: "/iot_mihail/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Даня 2 лампы
+    state_topic: "/iot_daniil/Relay/Switch"
+    command_topic: "/iot_daniil/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Даня 4 лампы
+    state_topic: "/iot_daniil/Relay2/Switch"
+    command_topic: "/iot_daniil/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Взрослая 4 лампы
+    state_topic: "/iot_adult/Relay/Switch"
+    command_topic: "/iot_adult/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Взрослая 2 лампы
+    state_topic: "/iot_adult/Relay2/Switch"
+    command_topic: "/iot_adult/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Прихожая внутри
+    state_topic: "/iot_lobby/Relay/Switch"
+    command_topic: "/iot_lobby/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Прихожая снаружи
+    state_topic: "/iot_lobby/Relay2/Switch"
+    command_topic: "/iot_lobby/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Ванная
+    state_topic: "/iot_bathroom/Relay/Switch"
+    command_topic: "/iot_bathroom/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Котельная
+    state_topic: "/iot_bathroom/Relay2/Switch"
+    command_topic: "/iot_bathroom/gpio/5"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Коридор
+    state_topic: "/iot_corridor/Relay/Switch"
+    command_topic: "/iot_corridor/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Туалет
+    state_topic: "/iot_toilet/Relay/Switch"
+    command_topic: "/iot_toilet/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
