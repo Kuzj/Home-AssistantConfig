@@ -124,6 +124,8 @@ class BME280(object):
         if spi_bus is not None and spi_dev is not None:
             import _spidev
             self._device = _spidev.Device(spi_bus,spi_dev)
+            self._spi_bus = spi_bus
+            self._spi_dev = spi_dev
         elif i2c is None:
             import Adafruit_GPIO.I2C as I2C
             i2c = I2C

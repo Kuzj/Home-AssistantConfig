@@ -20,10 +20,21 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 light: !include light.yaml
+sensor: !include sensor.yaml
+
 mqtt:
   broker: 127.0.0.1
   discovery: true
   discovery_prefix: homeassistant
+
+media_player:
+  - platform: samsungtv
+    name: SamsungTV
+    host: !secret samsung_tv_ip
+    port: 8000
+    method: pin
+    mac: !secret samsung_tv_mac
+
 #  - platform: group
 #    name: Kitchen Lights
 #    entities:

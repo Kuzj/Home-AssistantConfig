@@ -10,7 +10,7 @@ class Device(object):
         self._dev = spidev.SpiDev()
         self._dev.open(bus,dev)
         self._logger = logging.getLogger('Spi.Device.Bus.{0}.Dev.{1}'.format(bus, dev))
-        self._logger.setLevel(logging.DEBUG)
+        #self._logger.setLevel(logging.DEBUG)
 
     def write8(self, register, value):
         """Write an 8-bit value to the specified register."""
