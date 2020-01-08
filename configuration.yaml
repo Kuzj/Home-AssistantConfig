@@ -32,9 +32,9 @@ media_player:
     name: SamsungTV
     host: !secret samsung_tv_ip
     port: 8000
-    method: pin
     mac: !secret samsung_tv_mac
-
+    session_id: !secret samsung_tv_id
+    session_key: !secret samsung_tv_key
 #  - platform: group
 #    name: Kitchen Lights
 #    entities:
