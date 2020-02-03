@@ -192,8 +192,11 @@ class BME280(object):
         """Waits for reading to become available on device."""
         """Does a single burst read of all data values from device."""
         """Returns the raw (uncompensated) temperature from the sensor."""
+        c = 0
         while (self._device.readU8(BME280_REGISTER_STATUS) & 0x08):    # Wait for conversion to complete (TODO : add timeout)
             time.sleep(0.002)
+            c+=1
+            if c>10: raise Exception
         self.BME280Data = self._device.readList(BME280_REGISTER_DATA, 8)
         raw = ((self.BME280Data[3] << 16) | (self.BME280Data[4] << 8) | self.BME280Data[5]) >> 4
         return raw
