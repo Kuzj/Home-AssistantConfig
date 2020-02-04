@@ -4,6 +4,7 @@ from Adafruit_BME280 import *
 from periphery import GPIO
 from time import sleep
 
+DELAY_BETWEEN_SENSORS =0.1
 SPI_BUS = 0
 SPI_DEV_1 = 1
 SPI_DEV_2 = 2
@@ -78,16 +79,13 @@ class bme280Sensor():
 
 if __name__ == "__main__":
 	relayModuleInstance = relayModule()
-	relayModuleInstance.enableDeviceLine(SPI_DEV_1)
-	sleep(1)
-	relayModuleInstance.enableDeviceLine(SPI_DEV_2)
-	sleep(1)
-	relayModuleInstance.enableDeviceLine(SPI_DEV_3)
-	sleep(1)
-	relayModuleInstance.enableDeviceLine(SPI_DEV_4)
-	sleep(1)
-	relayModuleInstance.enableDeviceLine(SPI_DEV_5)
-	sleep(1)
+	for spiDev in [SPI_DEV_1, SPI_DEV_2, SPI_DEV_3, SPI_DEV_4]:
+		relayModuleInstance.enableDeviceLine(spiDev)
+		sleep(DELAY_BETWEEN_SENSORS)
+		bme280SensorInstance = bme280Sensor(spiDev)
+		payload = bme280SensorInstance.temperaturePressureHumidityJSON
+		publish.single("sensor/spi/{0}/{1}".format(SPI_BUS,spiDev), payload)
+		print(payload)
 	relayModuleInstance.close()
 	#payload = param_json(degrees,hectopascals,humidity)
 	#single(topic, payload=None, qos=0, retain=False, hostname="localhost",
