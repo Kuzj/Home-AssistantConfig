@@ -1,16 +1,61 @@
   - platform: mqtt
+    name: "Даня температура"
+    state_topic: "sensor/spi/0/1"
+    unit_of_measurement: '°C'
+    value_template: "{{ value_json.temperature }}"
+  - platform: mqtt
+    name: "Даня влажность"
+    state_topic: "sensor/spi/0/1"
+    unit_of_measurement: '%'
+    value_template: "{{ value_json.humidity }}"
+  - platform: mqtt
+    name: "Даня давление"
+    state_topic: "sensor/spi/0/1"
+    unit_of_measurement: 'hPa'
+    value_template: "{{ value_json.pressure }}"
+  - platform: mqtt
+    name: "Миша температура"
+    state_topic: "sensor/spi/0/2"
+    unit_of_measurement: '°C'
+    value_template: "{{ value_json.temperature }}"
+  - platform: mqtt
+    name: "Миша влажность"
+    state_topic: "sensor/spi/0/2"
+    unit_of_measurement: '%'
+    value_template: "{{ value_json.humidity }}"
+  - platform: mqtt
+    name: "Миша давление"
+    state_topic: "sensor/spi/0/2"
+    unit_of_measurement: 'hPa'
+    value_template: "{{ value_json.pressure }}"
+  - platform: mqtt
+    name: "Спальня температура"
+    state_topic: "sensor/spi/0/3"
+    unit_of_measurement: '°C'
+    value_template: "{{ value_json.temperature }}"
+  - platform: mqtt
+    name: "Спальня влажность"
+    state_topic: "sensor/spi/0/3"
+    unit_of_measurement: '%'
+    value_template: "{{ value_json.humidity }}"
+  - platform: mqtt
+    name: "Спальня давление"
+    state_topic: "sensor/spi/0/3"
+    unit_of_measurement: 'hPa'
+    value_template: "{{ value_json.pressure }}"
+  - platform: mqtt
     name: "Гостинная температура"
-    state_topic: "sensor/spi/0/0"
+    state_topic: "sensor/spi/0/4"
     unit_of_measurement: '°C'
     value_template: "{{ value_json.temperature }}"
   - platform: mqtt
     name: "Гостинная влажность"
-    state_topic: "sensor/spi/0/0"
+    state_topic: "sensor/spi/0/4"
     unit_of_measurement: '%'
     value_template: "{{ value_json.humidity }}"
   - platform: mqtt
     name: "Гостинная давление"
-    state_topic: "sensor/spi/0/0"
+    state_topic: "sensor/spi/0/4"
     unit_of_measurement: 'hPa'
     value_template: "{{ value_json.pressure }}"
   - platform: mqtt
