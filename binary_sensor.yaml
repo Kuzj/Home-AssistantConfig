@@ -1,0 +1,6 @@
+  - platform: mqtt
+    name: "Датчик движения гостинная"
+    state_topic: "sensor/pir/0"
+    payload_on: "True"
+    payload_off: "False"
+    device_class: motion

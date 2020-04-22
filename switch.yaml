@@ -1,0 +1,14 @@
+  - platform: sysfs_gpio
+    pins:
+      35:
+        name: Relay 1
+        invert_logic: true
+      36:
+        name: Relay 2
+        invert_logic: true
+      137:
+        name: Relay 3
+        invert_logic: true
+      138:
+        name: Relay 4
+        invert_logic: true
