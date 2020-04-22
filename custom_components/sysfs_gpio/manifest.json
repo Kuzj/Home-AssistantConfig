@@ -1,0 +1,7 @@
+{
+  "domain": "sysfs_gpio",
+  "name": "sysfs GPIO",
+  "documentation": "",
+  "requirements": ["python-periphery==2.0.1"],
+  "codeowners": ["kuzj"]
+}

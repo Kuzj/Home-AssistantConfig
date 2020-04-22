@@ -1,0 +1,12 @@
+{
+  "domain": "",
+  "name": "sensor spi bme280",
+  "documentation": "",
+  "requirements": [
+    "spidev==3.4"
+  ],
+  "dependencies": [],
+  "codeowners": [
+    "@kuzj"
+  ]
+}
