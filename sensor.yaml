@@ -1,63 +1,68 @@
-  - platform: mqtt
-    name: "Даня температура"
-    state_topic: "sensor/spi/0/1"
-    unit_of_measurement: '°C'
-    value_template: "{{ value_json.temperature }}"
-  - platform: mqtt
-    name: "Даня влажность"
-    state_topic: "sensor/spi/0/1"
-    unit_of_measurement: '%'
-    value_template: "{{ value_json.humidity }}"
-  - platform: mqtt
-    name: "Даня давление"
-    state_topic: "sensor/spi/0/1"
-    unit_of_measurement: 'hPa'
-    value_template: "{{ value_json.pressure }}"
-  - platform: mqtt
-    name: "Миша температура"
-    state_topic: "sensor/spi/0/2"
-    unit_of_measurement: '°C'
-    value_template: "{{ value_json.temperature }}"
-  - platform: mqtt
-    name: "Миша влажность"
-    state_topic: "sensor/spi/0/2"
-    unit_of_measurement: '%'
-    value_template: "{{ value_json.humidity }}"
-  - platform: mqtt
-    name: "Миша давление"
-    state_topic: "sensor/spi/0/2"
-    unit_of_measurement: 'hPa'
-    value_template: "{{ value_json.pressure }}"
-  - platform: mqtt
-    name: "Спальня температура"
-    state_topic: "sensor/spi/0/3"
-    unit_of_measurement: '°C'
-    value_template: "{{ value_json.temperature }}"
-  - platform: mqtt
-    name: "Спальня влажность"
-    state_topic: "sensor/spi/0/3"
-    unit_of_measurement: '%'
-    value_template: "{{ value_json.humidity }}"
-  - platform: mqtt
-    name: "Спальня давление"
-    state_topic: "sensor/spi/0/3"
-    unit_of_measurement: 'hPa'
-    value_template: "{{ value_json.pressure }}"
-  - platform: mqtt
-    name: "Гостинная температура"
-    state_topic: "sensor/spi/0/4"
-    unit_of_measurement: '°C'
-    value_template: "{{ value_json.temperature }}"
-  - platform: mqtt
-    name: "Гостинная влажность"
-    state_topic: "sensor/spi/0/4"
-    unit_of_measurement: '%'
-    value_template: "{{ value_json.humidity }}"
-  - platform: mqtt
-    name: "Гостинная давление"
-    state_topic: "sensor/spi/0/4"
-    unit_of_measurement: 'hPa'
-    value_template: "{{ value_json.pressure }}"
+  - platform: bme280_spi
+    name: BME_Out
+    time_standby: 3
+    oversampling_temperature: 1
+    oversampling_pressure: 1
+    oversampling_humidity: 1
+    spi_bus: 0
+    spi_dev: 1
+    monitored_conditions:
+      - temperature
+      - humidity
+      - pressure
+    scan_interval: 300
+  - platform: bme280_spi
+    name: BME_daniil
+    time_standby: 3
+    oversampling_temperature: 1
+    oversampling_pressure: 1
+    oversampling_humidity: 1
+    spi_bus: 0
+    spi_dev: 2
+    monitored_conditions:
+      - temperature
+      - humidity
+      - pressure
+    scan_interval: 300
+  - platform: bme280_spi
+    name: BME_misha
+    time_standby: 3
+    oversampling_temperature: 1
+    oversampling_pressure: 1
+    oversampling_humidity: 1
+    spi_bus: 0
+    spi_dev: 3
+    monitored_conditions:
+      - temperature
+      - humidity
+      - pressure
+    scan_interval: 300
+  - platform: bme280_spi
+    name: BME_adult
+    time_standby: 3
+    oversampling_temperature: 1
+    oversampling_pressure: 1
+    oversampling_humidity: 1
+    spi_bus: 0
+    spi_dev: 4
+    monitored_conditions:
+      - temperature
+      - humidity
+      - pressure
+    scan_interval: 300
+  - platform: bme280_spi
+    name: BME_living
+    time_standby: 3
+    oversampling_temperature: 1
+    oversampling_pressure: 1
+    oversampling_humidity: 1
+    spi_bus: 0
+    spi_dev: 5
+    monitored_conditions:
+      - temperature
+      - humidity
+      - pressure
+    scan_interval: 300
   - platform: mqtt
     name: "Гараж температура"
     state_topic: "sensor/nodemcu/htu21"
@@ -68,3 +73,79 @@
     state_topic: "sensor/nodemcu/htu21"
     unit_of_measurement: '%'
     value_template: "{{ value_json.humidity }}"
+
+#  - platform: mqtt
+#    name: "Даня температура"
+#    state_topic: "sensor/spi/0/1"
+#    unit_of_measurement: '°C'
+#    value_template: "{{ value_json.temperature }}"
+#  - platform: mqtt
+#    name: "Даня влажность"
+#    state_topic: "sensor/spi/0/1"
+#    unit_of_measurement: '%'
+#    value_template: "{{ value_json.humidity }}"
+#  - platform: mqtt
+#    name: "Даня давление"
+#    state_topic: "sensor/spi/0/1"
+#    unit_of_measurement: 'hPa'
+#    value_template: "{{ value_json.pressure }}"
+#  - platform: mqtt
+#    name: "Миша температура"
+#    state_topic: "sensor/spi/0/2"
+#    unit_of_measurement: '°C'
+#    value_template: "{{ value_json.temperature }}"
+#  - platform: mqtt
+#    name: "Миша влажность"
+#    state_topic: "sensor/spi/0/2"
+#    unit_of_measurement: '%'
+#    value_template: "{{ value_json.humidity }}"
+#  - platform: mqtt
+#    name: "Миша давление"
+#    state_topic: "sensor/spi/0/2"
+#    unit_of_measurement: 'hPa'
+#    value_template: "{{ value_json.pressure }}"
+#  - platform: mqtt
+#    name: "Спальня температура"
+#    state_topic: "sensor/spi/0/3"
+#    unit_of_measurement: '°C'
+#    value_template: "{{ value_json.temperature }}"
+#  - platform: mqtt
+#    name: "Спальня влажность"
+#    state_topic: "sensor/spi/0/3"
+#    unit_of_measurement: '%'
+#    value_template: "{{ value_json.humidity }}"
+#  - platform: mqtt
+#    name: "Спальня давление"
+#    state_topic: "sensor/spi/0/3"
+#    unit_of_measurement: 'hPa'
+#    value_template: "{{ value_json.pressure }}"
+#  - platform: mqtt
+#    name: "Гостинная температура"
+#    state_topic: "sensor/spi/0/4"
+#    unit_of_measurement: '°C'
+#    value_template: "{{ value_json.temperature }}"
+#  - platform: mqtt
+#    name: "Гостинная влажность"
+#    state_topic: "sensor/spi/0/4"
+#    unit_of_measurement: '%'
+#    value_template: "{{ value_json.humidity }}"
+#  - platform: mqtt
+#    name: "Гостинная давление"
+#    state_topic: "sensor/spi/0/4"
+#    unit_of_measurement: 'hPa'
+#    value_template: "{{ value_json.pressure }}"
+#  - platform: mqtt
+#    name: "Улица температура"
+#    state_topic: "sensor/spi/0/5"
+#    unit_of_measurement: '°C'
+#    value_template: "{{ value_json.temperature }}"
+#  - platform: mqtt
+#    name: "Улица влажность"
+#    state_topic: "sensor/spi/0/5"
+#    unit_of_measurement: '%'
+#    value_template: "{{ value_json.humidity }}"
+#  - platform: mqtt
+#    name: "Улица давление"
+#    state_topic: "sensor/spi/0/5"
+#    unit_of_measurement: 'hPa'
+#    value_template: "{{ value_json.pressure }}"

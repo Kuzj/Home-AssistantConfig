@@ -73,12 +73,24 @@
   - platform: mqtt
     name: Коридор
     state_topic: "/iot_corridor/Relay/Switch"
-    command_topic: "/iot_corridor/gpio/12"
+    command_topic: "/iot_corridor/gpio/4"
     payload_on: "1"
     payload_off: "0"
   - platform: mqtt
     name: Туалет
     state_topic: "/iot_toilet/Relay/Switch"
     command_topic: "/iot_toilet/gpio/12"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Гостиная центр
+    state_topic: "/iot_living/Relay/Switch"
+    command_topic: "/iot_living/gpio/4"
+    payload_on: "1"
+    payload_off: "0"
+  - platform: mqtt
+    name: Гостиная вход
+    state_topic: "/iot_living/Relay2/Switch"
+    command_topic: "/iot_living/gpio/13"
     payload_on: "1"
     payload_off: "0"
