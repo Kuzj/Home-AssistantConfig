@@ -8,7 +8,7 @@ from homeassistant.components.switch import PLATFORM_SCHEMA
 from homeassistant.const import CONF_NAME, DEVICE_DEFAULT_NAME
 import homeassistant.helpers.config_validation as cv
 from homeassistant.helpers.entity import ToggleEntity
-import importlib
+
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -48,9 +48,7 @@ class GPIOSwitch(ToggleEntity):
         self._name = params[CONF_NAME] or DEVICE_DEFAULT_NAME
         self._state = params[CONF_INITIAL]
         self._invert_logic = params[CONF_INVERT_LOGIC]
-
         self._gpio = sysfs_gpio.gpio_output(int(pin))
-        #bbb_gpio.setup_output(self._pin)
 
         if self._state is False:
             self._gpio.write(True if self._invert_logic else False)

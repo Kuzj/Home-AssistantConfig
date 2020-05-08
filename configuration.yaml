@@ -29,6 +29,9 @@ mqtt:
   discovery: true
   discovery_prefix: homeassistant
 
+#logger:
+#   default: debug
+
 #media_player:
 #  - platform: samsungtv
 #    name: SamsungTV
