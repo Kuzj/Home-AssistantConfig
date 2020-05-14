@@ -7,7 +7,12 @@ from homeassistant.components.media_player.const import DOMAIN as MP_DOMAIN
 from homeassistant.const import CONF_HOST, CONF_NAME, CONF_PORT
 import homeassistant.helpers.config_validation as cv
 
-from .const import CONF_ON_ACTION, DEFAULT_NAME, DOMAIN
+from .const import (CONF_ON_ACTION,
+    DEFAULT_NAME,
+    DOMAIN,
+    CONF_SESSION_ID,
+    CONF_SESSION_KEY,
+    )
 
 
 def ensure_unique_hosts(value):
@@ -23,13 +28,15 @@ CONFIG_SCHEMA = vol.Schema(
         DOMAIN: vol.All(
             cv.ensure_list,
             [
-                cv.deprecated(CONF_PORT),
+                #cv.deprecated(CONF_PORT),
                 vol.Schema(
                     {
                         vol.Required(CONF_HOST): cv.string,
                         vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
                         vol.Optional(CONF_PORT): cv.port,
                         vol.Optional(CONF_ON_ACTION): cv.SCRIPT_SCHEMA,
+                        vol.Optional(CONF_SESSION_ID): cv.string,
+                        vol.Optional(CONF_SESSION_KEY): cv.string,
                     }
                 ),
             ],

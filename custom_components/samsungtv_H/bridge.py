@@ -19,8 +19,11 @@ from homeassistant.const import (
 
 from .const import (
     CONF_DESCRIPTION,
+    CONF_SESSION_ID,
+    CONF_SESSION_KEY,
     LOGGER,
     METHOD_LEGACY,
+    METHOD_PIN,
     RESULT_AUTH_MISSING,
     RESULT_NOT_SUCCESSFUL,
     RESULT_NOT_SUPPORTED,
@@ -34,10 +37,18 @@ class SamsungTVBridge(ABC):
     """The Base Bridge abstract class."""
 
     @staticmethod
-    def get_bridge(method, host, port=None, token=None):
+    def get_bridge(method, host, port=None, token=None,
+        session_id=None, session_key=None):
         """Get Bridge instance."""
         if method == METHOD_LEGACY:
             return SamsungTVLegacyBridge(method, host, port)
+        elif method == METHOD_PIN:
+            return SamsungTVPinBridge(
+                method,
+                host,
+                port,
+                session_id,
+                session_key)
         return SamsungTVWSBridge(method, host, port, token)
 
     def __init__(self, method, host, port):
@@ -46,6 +57,8 @@ class SamsungTVBridge(ABC):
         self.method = method
         self.host = host
         self.token = None
+        self.session_id = None
+        self.session_key = None
         self.default_port = None
         self._remote = None
         self._callback = None
@@ -260,3 +273,72 @@ class SamsungTVWSBridge(SamsungTVBridge):
                 self._notify_callback()
                 raise
         return self._remote
+
+class SamsungTVPinBridge(SamsungTVBridge):
+    """The Bridge for TVs with pin."""
+
+    def __init__(self, method, host, port, session_id=None, session_key=None):
+        """Initialize Bridge."""
+        super().__init__(method, host, port)
+        self.session_id = session_id
+        self.session_key = session_key
+        self.default_port = 8000
+        self.config = {
+            CONF_NAME: VALUE_CONF_NAME,
+            CONF_DESCRIPTION: VALUE_CONF_NAME,
+            CONF_ID: VALUE_CONF_ID,
+            CONF_HOST: host,
+            CONF_METHOD: method,
+            CONF_SESSION_ID: session_id,
+            CONF_SESSION_KEY: session_key,
+            CONF_PORT: port,
+            CONF_TIMEOUT: 1,
+        }
+
+    def _get_remote(self):
+        """Create or return a remote control instance."""
+        if self._remote is None:
+            # We need to create a new instance to reconnect.
+            try:
+                LOGGER.debug("Create SamsungRemote")
+                self._remote = Remote(self.config.copy())
+            # This is only happening when the auth was switched to DENY
+            # A removed auth will lead to socket timeout because waiting for auth popup is just an open socket
+            except AccessDenied:
+                self._notify_callback()
+                raise
+        return self._remote
+
+    def _send_key(self, key):
+        """Send the key using protocol with pin."""
+        self._get_remote().control(key)
+
+    def try_connect(self):
+        """Try to connect to the TVs with pin."""
+        config = {
+            CONF_NAME: VALUE_CONF_NAME,
+            CONF_DESCRIPTION: VALUE_CONF_NAME,
+            CONF_ID: VALUE_CONF_ID,
+            CONF_HOST: self.host,
+            CONF_METHOD: self.method,
+            CONF_SESSION_ID: self.session_id,
+            CONF_SESSION_KEY: self.session_key,
+            CONF_PORT: self.port,
+            # We need this high timeout because waiting for auth popup is just an open socket
+            CONF_TIMEOUT: 31,
+        }
+        try:
+            LOGGER.debug("Try config: %s", config)
+            with Remote(config.copy()):
+                LOGGER.debug("Working config: %s", config)
+                return RESULT_SUCCESS
+        except AccessDenied:
+            LOGGER.debug("Working but denied config: %s", config)
+            return RESULT_AUTH_MISSING
+        except UnhandledResponse:
+            LOGGER.debug("Working but unsupported config: %s", config)
+            return RESULT_NOT_SUPPORTED
+        except OSError as err:
+            LOGGER.debug("Failing config: %s, error: %s", config, err)
+            return RESULT_NOT_SUCCESSFUL
+        #return RESULT_SUCCESS

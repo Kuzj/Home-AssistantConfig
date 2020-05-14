@@ -26,17 +26,20 @@ from .bridge import SamsungTVBridge
 from .const import (
     CONF_MANUFACTURER,
     CONF_MODEL,
+    CONF_SESSION_ID,
+    CONF_SESSION_KEY,
     DOMAIN,
     LOGGER,
     METHOD_LEGACY,
     METHOD_WEBSOCKET,
+    METHOD_PIN,
     RESULT_AUTH_MISSING,
     RESULT_NOT_SUCCESSFUL,
     RESULT_SUCCESS,
 )
 
 DATA_SCHEMA = vol.Schema({vol.Required(CONF_HOST): str, vol.Required(CONF_NAME): str})
-SUPPORTED_METHODS = [METHOD_LEGACY, METHOD_WEBSOCKET]
+SUPPORTED_METHODS = [METHOD_LEGACY, METHOD_WEBSOCKET, METHOD_PIN]
 
 
 def _get_ip(host):
@@ -77,10 +80,23 @@ class SamsungTVConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         }
         if self._bridge.token:
             data[CONF_TOKEN] = self._bridge.token
+        if self._bridge.session_id:
+            data[CONF_SESSION_ID] = self._bridge.session_id
+        if self._bridge.session_key:
+            data[CONF_SESSION_KEY] = self._bridge.session_key
         return self.async_create_entry(title=self._title, data=data,)
 
     def _try_connect(self):
         """Try to connect and check auth."""
+        if self._session_id is not None and self._session_key is not None:
+            self._bridge = SamsungTVBridge.get_bridge(
+                METHOD_PIN,
+                self._host,
+                session_id=self._session_id,
+                session_key=self._session_key)
+            result = self._bridge.try_connect()
+            if result != RESULT_NOT_SUCCESSFUL:
+                return result
         for method in SUPPORTED_METHODS:
             self._bridge = SamsungTVBridge.get_bridge(method, self._host)
             result = self._bridge.try_connect()
@@ -99,7 +115,6 @@ class SamsungTVConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             ip_address = await self.hass.async_add_executor_job(
                 _get_ip, user_input[CONF_HOST]
             )
-
             await self.async_set_unique_id(ip_address)
             self._abort_if_unique_id_configured()
 
@@ -107,6 +122,8 @@ class SamsungTVConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             self._ip = self.context[CONF_IP_ADDRESS] = ip_address
             self._name = user_input.get(CONF_NAME)
             self._title = self._name
+            self._session_key = user_input.get(CONF_SESSION_KEY)
+            self._session_id = user_input.get(CONF_SESSION_ID)
 
             result = await self.hass.async_add_executor_job(self._try_connect)
 

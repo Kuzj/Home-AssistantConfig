@@ -32,14 +32,12 @@ mqtt:
 #logger:
 #   default: debug
 
-#media_player:
-#  - platform: samsungtv
-#    name: SamsungTV
-#    host: !secret samsung_tv_ip
-#    port: 8000
-#    mac: !secret samsung_tv_mac
-#    session_id: !secret samsung_tv_id
-#    session_key: !secret samsung_tv_key
+samsungtv_H:
+    name: SamsungTV
+    host: !secret samsung_tv_ip
+    port: 8000
+    session_id: !secret samsung_tv_id
+    session_key: !secret samsung_tv_key
 
 
 #  - platform: group

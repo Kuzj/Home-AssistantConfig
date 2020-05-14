@@ -34,7 +34,14 @@ from homeassistant.helpers.script import Script
 from homeassistant.util import dt as dt_util
 
 from .bridge import SamsungTVBridge
-from .const import CONF_MANUFACTURER, CONF_MODEL, CONF_ON_ACTION, DOMAIN, LOGGER
+from .const import (CONF_MANUFACTURER,
+    CONF_MODEL,
+    CONF_ON_ACTION,
+    CONF_SESSION_ID,
+    CONF_SESSION_KEY,
+    DOMAIN,
+    LOGGER,
+    )
 
 KEY_PRESS_TIMEOUT = 1.2
 SOURCES = {"TV": "KEY_TV", "HDMI": "KEY_HDMI"}
@@ -76,6 +83,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
     data = config_entry.data.copy()
     bridge = SamsungTVBridge.get_bridge(
         data[CONF_METHOD], data[CONF_HOST], data[CONF_PORT], data.get(CONF_TOKEN),
+        data.get(CONF_SESSION_ID), data.get(CONF_SESSION_KEY),
     )
     if bridge.port is None and bridge.default_port is not None:
         # For backward compat, set default port for websocket tv
@@ -83,6 +91,7 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
         hass.config_entries.async_update_entry(config_entry, data=data)
         bridge = SamsungTVBridge.get_bridge(
             data[CONF_METHOD], data[CONF_HOST], data[CONF_PORT], data.get(CONF_TOKEN),
+            data.get(CONF_SESSION_ID), data.get(CONF_SESSION_KEY),
         )
 
     async_add_entities([SamsungTVDevice(bridge, config_entry, on_script)])
