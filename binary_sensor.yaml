@@ -2,9 +2,9 @@
   pins:
     129:
       name: motion
-#  - platform: mqtt
-#    name: "Датчик движения гостинная"
-#    state_topic: "sensor/pir/0"
-#    payload_on: "True"
-#    payload_off: "False"
-#    device_class: motion
+- platform: mqtt
+  name: "Датчик движения гараж"
+  state_topic: "sensor/garage/motion"
+  payload_on: "True"
+  payload_off: "False"
+  device_class: motion
