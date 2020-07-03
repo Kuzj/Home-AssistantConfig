@@ -1,0 +1,34 @@
+sensor.bme_adult_temperature:
+  name: Температура взрослая
+sensor.bme_adult_humidity:
+  name: Влажность взрослая
+sensor.bme_adult_pressure:
+  name: Давление взрослая
+sensor.bme_misha_temperature:
+  name: Температура Миша
+sensor.bme_misha_humidity:
+  name: Влажность Миша
+sensor.bme_misha_pressure:
+  name: Давление Миша
+sensor.bme_daniil_temperature:
+  name: Температура Даниил
+sensor.bme_daniil_humidity:
+  name: Влажность Даниил
+sensor.bme_daniil_pressure:
+  name: Давление Даниил
+sensor.bme_living_temperature:
+  name: Температура гостиная
+sensor.bme_living_humidity:
+  name: Влажность гостиная
+sensor.bme_living_pressure:
+  name: Давление гостиная
+sensor.bme_out_temperature:
+  name: Температура улица
+sensor.bme_out_humidity:
+  name: Влажность улица
+sensor.bme_out_pressure:
+  name: Давление улица
+sensor.garazh_temperatura:
+  name: Температура гараж
+sensor.garazh_vlazhnost:
+  name: Влажность гараж
