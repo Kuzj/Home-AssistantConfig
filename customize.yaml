@@ -1,0 +1,51 @@
+  sensor.bme_adult_temperature:
+    device_class: temperature
+    friendly_name: Температура взрослая
+  sensor.bme_adult_humidity:
+    device_class: humidity
+    friendly_name: Влажность взрослая
+  sensor.bme_adult_pressure:
+    device_class: pressure
+    friendly_name: Давление взрослая
+  sensor.bme_misha_temperature:
+    device_class: temperature
+    friendly_name: Температура Миша
+  sensor.bme_misha_humidity:
+    device_class: humidity
+    friendly_name: Влажность Миша
+  sensor.bme_misha_pressure:
+    device_class: pressure
+    friendly_name: Давление Миша
+  sensor.bme_daniil_temperature:
+    device_class: temperature
+    friendly_name: Температура Даниил
+  sensor.bme_daniil_humidity:
+    device_class: humidity
+    friendly_name: Влажность Даниил
+  sensor.bme_daniil_pressure:
+    device_class: pressure
+    friendly_name: Давление Даниил
+  sensor.bme_living_temperature:
+    device_class: temperature
+    friendly_name: Температура гостиная
+  sensor.bme_living_humidity:
+    device_class: humidity
+    friendly_name: Влажность гостиная
+  sensor.bme_living_pressure:
+    device_class: pressure
+    friendly_name: Давление гостиная
+  sensor.bme_out_temperature:
+    device_class: temperature
+    friendly_name: Температура улица
+  sensor.bme_out_humidity:
+    device_class: humidity
+    friendly_name: Влажность улица
+  sensor.bme_out_pressure:
+    device_class: pressure
+    friendly_name: Давление улица
+  sensor.garazh_temperatura:
+    device_class: temperature
+    friendly_name: Температура гараж
+  sensor.garazh_vlazhnost:
+    device_class: humidity
+    friendly_name: Влажность гараж
