@@ -65,87 +65,37 @@
     scan_interval: 300
   - platform: mqtt
     name: "Гараж температура"
-    state_topic: "sensor/nodemcu/htu21"
+    state_topic: "sensor/garage/htu21"
     unit_of_measurement: '°C'
     value_template: "{{ value_json.temperature }}"
   - platform: mqtt
     name: "Гараж влажность"
-    state_topic: "sensor/nodemcu/htu21"
+    state_topic: "sensor/garage/htu21"
     unit_of_measurement: '%'
     value_template: "{{ value_json.humidity }}"
-
-#  - platform: mqtt
-#    name: "Даня температура"
-#    state_topic: "sensor/spi/0/1"
-#    unit_of_measurement: '°C'
-#    value_template: "{{ value_json.temperature }}"
-#  - platform: mqtt
-#    name: "Даня влажность"
-#    state_topic: "sensor/spi/0/1"
-#    unit_of_measurement: '%'
-#    value_template: "{{ value_json.humidity }}"
-#  - platform: mqtt
-#    name: "Даня давление"
-#    state_topic: "sensor/spi/0/1"
-#    unit_of_measurement: 'hPa'
-#    value_template: "{{ value_json.pressure }}"
-#  - platform: mqtt
-#    name: "Миша температура"
-#    state_topic: "sensor/spi/0/2"
-#    unit_of_measurement: '°C'
-#    value_template: "{{ value_json.temperature }}"
-#  - platform: mqtt
-#    name: "Миша влажность"
-#    state_topic: "sensor/spi/0/2"
-#    unit_of_measurement: '%'
-#    value_template: "{{ value_json.humidity }}"
-#  - platform: mqtt
-#    name: "Миша давление"
-#    state_topic: "sensor/spi/0/2"
-#    unit_of_measurement: 'hPa'
-#    value_template: "{{ value_json.pressure }}"
-#  - platform: mqtt
-#    name: "Спальня температура"
-#    state_topic: "sensor/spi/0/3"
-#    unit_of_measurement: '°C'
-#    value_template: "{{ value_json.temperature }}"
-#  - platform: mqtt
-#    name: "Спальня влажность"
-#    state_topic: "sensor/spi/0/3"
-#    unit_of_measurement: '%'
-#    value_template: "{{ value_json.humidity }}"
-#  - platform: mqtt
-#    name: "Спальня давление"
-#    state_topic: "sensor/spi/0/3"
-#    unit_of_measurement: 'hPa'
-#    value_template: "{{ value_json.pressure }}"
-#  - platform: mqtt
-#    name: "Гостинная температура"
-#    state_topic: "sensor/spi/0/4"
-#    unit_of_measurement: '°C'
-#    value_template: "{{ value_json.temperature }}"
-#  - platform: mqtt
-#    name: "Гостинная влажность"
-#    state_topic: "sensor/spi/0/4"
-#    unit_of_measurement: '%'
-#    value_template: "{{ value_json.humidity }}"
-#  - platform: mqtt
-#    name: "Гостинная давление"
-#    state_topic: "sensor/spi/0/4"
-#    unit_of_measurement: 'hPa'
-#    value_template: "{{ value_json.pressure }}"
-#  - platform: mqtt
-#    name: "Улица температура"
-#    state_topic: "sensor/spi/0/5"
-#    unit_of_measurement: '°C'
-#    value_template: "{{ value_json.temperature }}"
-#  - platform: mqtt
-#    name: "Улица влажность"
-#    state_topic: "sensor/spi/0/5"
-#    unit_of_measurement: '%'
-#    value_template: "{{ value_json.humidity }}"
-#  - platform: mqtt
-#    name: "Улица давление"
-#    state_topic: "sensor/spi/0/5"
-#    unit_of_measurement: 'hPa'
-#    value_template: "{{ value_json.pressure }}"
+  - platform: mqtt
+    name: "Гараж дверь"
+    state_topic: "sensor/garage/sonic"
+    unit_of_measurement: 'cm'
+    value_template: "{{ value_json.distance }}"
+  - platform: template
+    sensors:
+      garage_door_friendly:
+        entity_id: sensor.garazh_dver
+        unit_of_measurement: '%'
+        value_template: >
+          {% set distance = ((states('sensor.garazh_dver')|float|round - 14) / 2.54)|float|round %}
+          {% if distance<0 %} 0 {% elif distance>100 %} 100 {% else %} {{distance}} {% endif %}
+        entity_picture_template: >
+          {% set distance = ((states('sensor.garazh_dver')|float|round - 14) / 2.54)|float|round %}
+          {% if distance<5 %}
+            /local/img/garage_door/0.png
+          {% elif distance>4 and distance<35 %}
+            /local/img/garage_door/25.png
+          {% elif distance>34 and distance<65  %}
+            /local/img/garage_door/50.png
+          {% elif distance>64 and distance<95  %}
+            /local/img/garage_door/75.png
+          {% else %}
+            /local/img/garage_door/100.png
+          {% endif %}
