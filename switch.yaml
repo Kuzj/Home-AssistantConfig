@@ -12,3 +12,9 @@
       138:
         name: Relay 4
         invert_logic: true
+  - platform: mqtt
+    name: Гараж ворота
+    state_topic: "iot_garage/Relay/State"
+    command_topic: "iot_garage/gpio/16"
+    payload_on: "1"
+    payload_off: "0"
