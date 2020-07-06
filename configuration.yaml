@@ -1,16 +1,20 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
 homeassistant:
   name: kuzindom
   latitude: !secret latitude
   longitude: !secret longitude
   unit_system: metric
   time_zone: Europe/Moscow
+  customize: !include customize.yaml
+
+http:
+  base_url: !secret domain
+  trusted_proxies: !secret proxy
+  use_x_forwarded_for: true
+  ip_ban_enabled: true
+  login_attempts_threshold: 5
 
 # Text to speech
 tts:
@@ -39,6 +43,15 @@ samsungtv_H:
     session_id: !secret samsung_tv_id
     session_key: !secret samsung_tv_key
 
+google_assistant:
+  project_id: !secret project_id
+  service_account: !include google_service.json
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+    - sensor
+  entity_config: !include google_assistant_entity.yaml
 
 #  - platform: group
 #    name: Kitchen Lights
